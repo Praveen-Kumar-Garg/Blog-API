@@ -17,14 +17,23 @@ router.post('/', async (req, res) => {
 });
 
 //read all blog post 
-router.get('/', async (req, res) => {
+// router.get('/', async (req, res) => {
+//     try {
+//       const posts = await Post.find(); // Fetch all blog posts from the database
+//       res.json(posts);
+//     } catch (err) {
+//       res.status(500).json({ error: err.message });
+//     }
+//   });
+  router.get('/', async (req, res, next) => {
     try {
-      const posts = await Post.find(); // Fetch all blog posts from the database
+      const posts = await Post.find();
       res.json(posts);
     } catch (err) {
-      res.status(500).json({ error: err.message });
+      next(err); // Forward error to error-handling middleware
     }
   });
+  
   
 //update a post
 router.post('/:id', async (req, res) => {

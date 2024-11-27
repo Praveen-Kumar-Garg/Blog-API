@@ -13,6 +13,14 @@ const PORT = 5000;
 
 //middleware
 app.use(bodyparser.json());
+// Logging middleware
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    next(); // Pass control to the next middleware
+  });
+  
+
+
 
 //connect to Mongodb
 mongoose.connect('mongodb://localhost:27017/blogDB', {useNewUrlParser:true, useUnifiedTopology:true})
